@@ -15,14 +15,20 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
-    @PostMapping
+    @PutMapping
     public String add(@RequestBody EmployeeRequest employeeRequest){
         employeeService.addEmployee(employeeRequest);
-        return "successfully added";
+        return "successfully updated";
     }
 
     @GetMapping
     public List<EmployeeResponse> getAll() {
         return employeeService.getAll();
     }
+
+    @GetMapping("/{id}")
+    public EmployeeResponse getById(@PathVariable("id") Long empId) {
+        return employeeService.getEmployee(empId);
+    }
+
 }
