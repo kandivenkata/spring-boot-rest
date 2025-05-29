@@ -1,11 +1,14 @@
 package com.krishna.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
+import lombok.*;
 
 @Entity
 @Table
+@NoArgsConstructor
 @Builder
+@AllArgsConstructor
+@Getter
 public class Employee {
 
     @Id
