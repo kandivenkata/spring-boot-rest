@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
@@ -30,6 +31,25 @@ public class EmployeeServiceImpl implements EmployeeService{
     public List<EmployeeResponse> getAll() {
         List<Employee> employeeList = employeeRepository.findAll();
         return getEmployeeResponse(employeeList);
+    }
+
+    @Override
+    public EmployeeResponse getEmployee(Long empId) {
+      Optional<Employee> optionalEmployee =  employeeRepository.findById(empId);
+
+        return buildEmployeeResponse(optionalEmployee);
+    }
+
+    private static EmployeeResponse buildEmployeeResponse(Optional<Employee> optionalEmployee) {
+        EmployeeResponse employeeResponse =null;
+        if(optionalEmployee.isPresent()){
+            Employee employee = optionalEmployee.get();
+            employeeResponse =  EmployeeResponse.builder()
+                    .empId(employee.getEmpId())
+                    .name(employee.getName())
+                    .build();
+        }
+        return employeeResponse;
     }
 
     List<EmployeeResponse> getEmployeeResponse(List<Employee> employees) {
