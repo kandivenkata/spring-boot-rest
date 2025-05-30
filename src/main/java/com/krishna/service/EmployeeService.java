@@ -13,4 +13,8 @@ public interface EmployeeService {
     public List<EmployeeResponse> getAll();
 
     public EmployeeResponse getEmployee(Long empId);
+
+    void updateEmployee(EmployeeRequest employeeRequest);
+
+    void deleteEmployee(Long empId);
 }

@@ -40,6 +40,20 @@ public class EmployeeServiceImpl implements EmployeeService{
         return buildEmployeeResponse(optionalEmployee);
     }
 
+    @Override
+    public void updateEmployee(EmployeeRequest employeeRequest) {
+    Employee employee =  employeeRepository.findById(employeeRequest.getId()).orElseThrow(()->new RuntimeException("employee not found"));
+            employee.setName(employeeRequest.getName());
+            employeeRepository.save(employee);
+
+    }
+
+    @Override
+    public void deleteEmployee(Long empId) {
+        Employee employee =  employeeRepository.findById(empId).orElseThrow(()->new RuntimeException("employee not found"));
+        employeeRepository.delete(employee);
+    }
+
     private static EmployeeResponse buildEmployeeResponse(Optional<Employee> optionalEmployee) {
         EmployeeResponse employeeResponse =null;
         if(optionalEmployee.isPresent()){
