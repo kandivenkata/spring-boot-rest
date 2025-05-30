@@ -14,7 +14,7 @@ public interface EmployeeService {
 
     public EmployeeResponse getEmployee(Long empId);
 
-    void updateEmployee(EmployeeRequest employeeRequest);
+    public void updateEmployee(EmployeeRequest employeeRequest);
 
-    void deleteEmployee(Long empId);
+    public void deleteEmployee(Long empId);
 }
